@@ -6,10 +6,11 @@ import cors from 'cors';
 import authRoutes from './routes/auth.route.js';
 import { connectDB } from './lib/db.js';
 import messageRoutes from './routes/message.route.js'
+import {app, server} from "./lib/socket.js"
 
 dotnev.config();
 
-const app = express();
+
 const PORT = process.env.PORT
 
 app.use(express.json());
@@ -21,7 +22,7 @@ app.use(cors({
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     connectDB();
 })
